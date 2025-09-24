@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Unforgettable Surprise! 🎇</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Hind+Siliguri:wght@400;600&display=swap');
+
+        :root {
+            --primary-color: #ff6b81;
+            --secondary-color: #4a69bd;
+        }
+
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background: #0f0c29;
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #main-content {
+            z-index: 1;
+            position: relative;
+        }
+
+        .hidden { display: none !important; }
+
+        #countdown-container h1 { font-size: 2.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        #timer { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+        .time-box { background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 15px; min-width: 75px; backdrop-filter: blur(10px); }
+        .time-box span { display: block; font-size: 2.5rem; font-weight: 600; }
+        .time-box small { font-size: 0.8rem; }
+        .quote-box { margin-top: 2rem; padding: 1rem; background: rgba(0, 0, 0, 0.2); border-radius: 10px; max-width: 500px; margin-left: auto; margin-right: auto; border: 1px solid rgba(255,255,255,0.1); }
+
+        #gift-container { cursor: pointer; animation: pulse 2s infinite; }
+        .gift-box { position: relative; width: 150px; height: 150px; margin: 2rem auto; }
+        .gift-box::before { content: ''; position: absolute; width: 160px; height: 40px; background: var(--primary-color); top: -20px; left: -5px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: all 0.5s ease; }
+        .gift-box::after { content: ''; position: absolute; width: 150px; height: 150px; background: #e74c3c; border-radius: 5px; }
+        .ribbon { position: absolute; width: 25px; height: 170px; background: #f1c40f; top: -20px; left: 62.5px; }
+        #gift-container.open .gift-box::before { transform: translateY(-100px) rotate(25deg) scale(0); }
+
+        #surprise-container { animation: fadeIn 1.5s ease-in-out; max-height: 100vh; overflow-y: auto; padding: 2rem; width: 100vw; }
+        
+        .gallery-container { position: relative; max-width: 400px; margin: 1rem auto; }
+        .gallery-image { width: 100%; height: 300px; object-fit: cover; border-radius: 15px; border: 5px solid white; box-shadow: 0 0 25px rgba(255,255,255,0.5); }
+        .gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; font-size: 2rem; cursor: pointer; padding: 0.5rem 1rem; border-radius: 50%; backdrop-filter: blur(5px); }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+        
+        .wish-jar-container, .kobita-container { margin-top: 2rem; }
+        .wish-jar { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; perspective: 1000px; }
+        .wish-note { width: 150px; height: 150px; cursor: pointer; position: relative; transform-style: preserve-3d; transition: transform 0.8s; }
+        .wish-note .front, .wish-note .back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; justify-content: center; align-items: center; text-align: center; padding: 10px; border-radius: 10px; }
+        .wish-note .front { background: #f1c40f; color: #333; font-weight: 600; }
+        .wish-note .back { background: #ecf0f1; color: #333; transform: rotateY(180deg); }
+        .wish-note.flipped { transform: rotateY(180deg); }
+
+        .kobita {
+            white-space: pre-wrap; /* This preserves line breaks in the poem */
+            font-size: 1.1rem;
+            line-height: 2;
+            font-style: italic;
+        }
+        
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    
+    <div id="tsparticles"></div>
+
+    <div id="main-content">
+        <div id="countdown-container">
+            <h1>A magical surprise is getting ready... ✨</h1>
+            <p>Hold your breath for the final countdown!</p>
+            <div id="timer">
+                <div class="time-box"><span id="days">00</span><small>Days</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>Seconds</small></div>
+            </div>
+            <div class="quote-box">
+                <p>"Count your life by smiles, not tears. Count your age by friends, not years." 💖</p>
+                <p>"তোমার জীবনকে হাসি দিয়ে পরিমাপ করো, চোখের জল দিয়ে নয়। তোমার বয়সকে বন্ধু দিয়ে পরিমাপ করো, বছর দিয়ে নয়।"</p>
+            </div>
+        </div>
+        
+        <div id="gift-container" class="hidden">
+            <h1>Something special has arrived! 🎁 Click to unbox your happiness!</h1>
+            <div class="gift-box"><div class="ribbon"></div></div>
+        </div>
+
+        <div id="surprise-container" class="hidden">
+            <h1 id="birthday-title"></h1>
+            <p>Welcome to your own little universe of memories and wishes!</p>
+
+            <div class="gallery-container">
+                <img src="" alt="Friendship Picture" id="gallery-image" class="gallery-image">
+                <button id="prev-btn" class="gallery-btn">❮</button>
+                <button id="next-btn" class="gallery-btn">❯</button>
+            </div>
+
+            <div class="wish-jar-container">
+                <h2>A Jar Full of Wishes For You... 💌</h2>
+                <p>(Click on the notes to read them!)</p>
+                <div class="wish-jar">
+                    <div class="wish-note"><div class="front">📜 1</div><div class="back">অনেক অনেক শুভকামনা! সবসময় এভাবেই হাসিখুশি থেকো। 😊</div></div>
+                    <div class="wish-note"><div class="front">📜 2</div><div class="back">আমাদের বন্ধুত্ব অটুট থাকুক সারাজীবন। 😄</div></div>
+                    <div class="wish-note"><div class="front">📜 3</div><div class="back">তোমার আজকের দিনটা যেন তোমার মতোই স্পেশাল হয়! ✨</div></div>
+                    <div class="wish-note"><div class="front">📜 4</div><div class="back">জীবনে যা চাও, তার চেয়েও বেশি পাও। 🚀</div></div>
+                </div>
+            </div>
+            
+            <div class="kobita-container">
+                <h2>তোমার জন্য এক টুকরো কবিতা... ✒️</h2>
+                <div class="quote-box">
+                    <p class="kobita">
+                        "পুরানো সেই দিনের কথা ভুলবি কি রে হায়।
+                        ও সেই চোখে দেখা, প্রাণের কথা, সে কি ভোলা যায়।
+                        আয় আর-একটিবার আয় রে সখা, প্রাণের মাঝে আয়।
+                        মোরা সুখের দুখের কথা কব, প্রাণ জুড়াবে তায়।"
+                    </p>
+                    <p style="text-align: right; margin-top: 1rem;">- রবীন্দ্রনাথ ঠাকুর</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // ---- CONFIGURATIONS (এখান থেকে তথ্য পরিবর্তন করুন) ----
+        const friendName = "মিষ্টি 🍰";
+        
+        // New Peaceful Images for the gallery
+        const galleryImages = [
+            'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500&q=80', // Serene lake and mountains
+            'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&q=80', // Peaceful forest path
+            'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?w=500&q=80'  // Starry night sky
+        ];
+
+        // --- Countdown Timer Target ---
+        // Final Target Date (Birthday at Midnight)
+        const finalTargetDate = new Date('2025-09-25T00:00:00');
+
+        // To test, uncomment the line below and set it a few minutes in the future
+        // const testTargetDate = new Date(new Date().getTime() + 5 * 60000); // 5 minutes from now
+
+        const targetDate = finalTargetDate.getTime(); // Change to 'testTargetDate' for testing
+        // --------------------------------------------------------
+        
+        const countdownContainer = document.getElementById('countdown-container');
+        const giftContainer = document.getElementById('gift-container');
+        const surpriseContainer = document.getElementById('surprise-container');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const birthdayTitleEl = document.getElementById('birthday-title');
+        const galleryImageEl = document.getElementById('gallery-image');
+
+        // Set the initial image for the gallery
+        galleryImageEl.src = galleryImages[0];
+
+        if (window.tsParticles) {
+            tsParticles.load("tsparticles", {
+                fpsLimit: 60,
+                interactivity: { events: { onHover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 100 } } },
+                particles: {
+                    color: { value: "#ffffff" },
+                    links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 },
+                    move: { enable: true, speed: 2, direction: "none", outModes: "out" },
+                    number: { density: { enable: true }, value: 80 },
+                    opacity: { value: 0.3 },
+                    shape: { type: "circle" },
+                    size: { value: { min: 1, max: 5 } },
+                },
+            });
+        }
+        
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                countdownContainer.classList.add('hidden');
+                giftContainer.classList.remove('hidden');
+                return;
+            }
+
+            daysEl.innerText = formatTime(Math.floor(distance / (1000 * 60 * 60 * 24)));
+            hoursEl.innerText = formatTime(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            minutesEl.innerText = formatTime(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            secondsEl.innerText = formatTime(Math.floor((distance % (1000 * 60)) / 1000));
+        }, 1000);
+
+        giftContainer.addEventListener('click', () => {
+            giftContainer.classList.add('open');
+            if(window.confetti) {
+                confetti({ particleCount: 200, spread: 180, origin: { y: 0.6 } });
+            }
+            setTimeout(() => {
+                giftContainer.classList.add('hidden');
+                surpriseContainer.classList.remove('hidden');
+                birthdayTitleEl.innerHTML = `🎉🎂 শুভ জন্মদিন, ${friendName}! 🥳🎈`;
+            }, 800);
+        });
+
+        let currentImageIndex = 0;
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            galleryImageEl.src = galleryImages[currentImageIndex];
+        });
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            galleryImageEl.src = galleryImages[currentImageIndex];
+        });
+
+        document.querySelectorAll('.wish-note').forEach(note => {
+            note.addEventListener('click', () => {
+                note.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+</html>
