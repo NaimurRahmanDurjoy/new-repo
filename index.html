@@ -761,382 +761,174 @@
          JAVASCRIPT
     ========================== -->
 
-    <script>
+<script>
+    const friendName = "মিষ্টি";
 
-        /* =====================================
-           1. CHANGE THESE TWO THINGS
-        ====================================== */
+    // TEST: এখন থেকে কয়েক মিনিট পরের সময় দাও
+    const birthdayDate = "2026-09-24T23:00:00+06:00";
 
-        const friendName = "মিষ্টি";
+    document.getElementById("lockName").textContent = friendName;
+    document.getElementById("mainName").textContent = friendName;
 
-        /*
-           IMPORTANT:
-           Birthday date + midnight.
+    const lockScreen = document.getElementById("lockScreen");
+    const mainContent = document.getElementById("mainContent");
 
-           Format:
-           YYYY-MM-DDTHH:MM:SS+06:00
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
-           +06:00 = Bangladesh time
-        */
+    const targetTime = new Date(birthdayDate).getTime();
 
-        const birthdayDate =
-            "2026-09-24T00:00:00+06:00";
+    function unlockWebsite() {
+        lockScreen.style.display = "none";
+        mainContent.style.display = "block";
 
+        window.scrollTo(0, 0);
 
-        /* =====================================
-           2. SET NAME
-        ====================================== */
+        celebration();
+    }
 
-        document.getElementById("lockName").textContent = friendName;
-        document.getElementById("mainName").textContent = friendName;
+    function updateCountdown() {
 
+        const now = Date.now();
+        const difference = targetTime - now;
 
-        /* =====================================
-           3. ELEMENTS
-        ====================================== */
+        console.log("Remaining:", difference);
 
-        const lockScreen =
-            document.getElementById("lockScreen");
-
-        const mainContent =
-            document.getElementById("mainContent");
-
-        const daysEl =
-            document.getElementById("days");
-
-        const hoursEl =
-            document.getElementById("hours");
-
-        const minutesEl =
-            document.getElementById("minutes");
-
-        const secondsEl =
-            document.getElementById("seconds");
-
-
-        /* =====================================
-           4. COUNTDOWN
-        ====================================== */
-
-        const targetTime =
-            new Date(birthdayDate).getTime();
-
-
-        function updateCountdown() {
-
-            const now =
-                new Date().getTime();
-
-            const difference =
-                targetTime - now;
-
-
-            /* Birthday has arrived */
-
-            if (difference <= 0) {
-
-                unlockWebsite();
-
-                return;
-            }
-
-
-            const days =
-                Math.floor(
-                    difference /
-                    (1000 * 60 * 60 * 24)
-                );
-
-
-            const hours =
-                Math.floor(
-                    (difference %
-                    (1000 * 60 * 60 * 24)) /
-                    (1000 * 60 * 60)
-                );
-
-
-            const minutes =
-                Math.floor(
-                    (difference %
-                    (1000 * 60 * 60)) /
-                    (1000 * 60)
-                );
-
-
-            const seconds =
-                Math.floor(
-                    (difference %
-                    (1000 * 60)) /
-                    1000
-                );
-
-
-            daysEl.textContent =
-                String(days).padStart(2, "0");
-
-            hoursEl.textContent =
-                String(hours).padStart(2, "0");
-
-            minutesEl.textContent =
-                String(minutes).padStart(2, "0");
-
-            secondsEl.textContent =
-                String(seconds).padStart(2, "0");
-        }
-
-
-        /* =====================================
-           5. UNLOCK
-        ====================================== */
-
-        let unlocked = false;
-
-
-        function unlockWebsite() {
-
-            if (unlocked) return;
-
-            unlocked = true;
-
+        if (difference <= 0) {
+            unlockWebsite();
             clearInterval(countdownInterval);
-
-            lockScreen.style.display = "none";
-
-            mainContent.style.display = "block";
-
-            window.scrollTo(0, 0);
-
-            celebration();
-
+            return;
         }
 
+        const days = Math.floor(
+            difference / (1000 * 60 * 60 * 24)
+        );
 
-        /* =====================================
-           6. RUN COUNTDOWN
-        ====================================== */
+        const hours = Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
 
-        updateCountdown();
+        const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
 
-        const countdownInterval =
-            setInterval(
-                updateCountdown,
-                1000
-            );
+        const seconds = Math.floor(
+            (difference % (1000 * 60)) / 1000
+        );
 
+        daysEl.textContent = String(days).padStart(2, "0");
+        hoursEl.textContent = String(hours).padStart(2, "0");
+        minutesEl.textContent = String(minutes).padStart(2, "0");
+        secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
 
-        /* =====================================
-           7. WISH CARDS
-        ====================================== */
+    function openWish(element) {
+        element.classList.toggle("open");
+        createFloatingEmoji();
+    }
 
-        function openWish(element) {
+    function createFloatingEmoji() {
 
-            element.classList.toggle("open");
+        const emojis = ["💗", "✨", "🌸", "💫", "🎀", "🌷"];
 
-            createFloatingEmoji();
+        const emoji = document.createElement("div");
 
+        emoji.className = "floating";
+
+        emoji.textContent =
+            emojis[Math.floor(Math.random() * emojis.length)];
+
+        emoji.style.left =
+            Math.random() * 100 + "vw";
+
+        emoji.style.fontSize =
+            (Math.random() * 14 + 18) + "px";
+
+        emoji.style.animationDuration =
+            (Math.random() * 3 + 4) + "s";
+
+        document.body.appendChild(emoji);
+
+        setTimeout(() => {
+            emoji.remove();
+        }, 7000);
+    }
+
+    function celebration() {
+
+        for (let i = 0; i < 35; i++) {
+            setTimeout(createFloatingEmoji, i * 100);
         }
 
+        const colors = [
+            "#ff6b9d",
+            "#ffcf56",
+            "#9b7bff",
+            "#ffffff",
+            "#7ee8fa"
+        ];
 
-        /* =====================================
-           8. STARS
-        ====================================== */
-
-        function createStars() {
-
-            const stars =
-                document.getElementById("stars");
-
-
-            for (let i = 0; i < 90; i++) {
-
-                const star =
-                    document.createElement("div");
-
-                star.className = "star";
-
-                star.textContent = "✦";
-
-                star.style.left =
-                    Math.random() * 100 + "%";
-
-                star.style.top =
-                    Math.random() * 100 + "%";
-
-                star.style.fontSize =
-                    (Math.random() * 8 + 4) + "px";
-
-                star.style.animationDelay =
-                    Math.random() * 3 + "s";
-
-                stars.appendChild(star);
-            }
-        }
-
-
-        createStars();
-
-
-        /* =====================================
-           9. FLOATING EMOJIS
-        ====================================== */
-
-        function createFloatingEmoji() {
-
-            const emojis = [
-                "💗",
-                "✨",
-                "🌸",
-                "💫",
-                "🎀",
-                "🌷"
-            ];
-
-
-            const emoji =
-                document.createElement("div");
-
-            emoji.className = "floating";
-
-            emoji.textContent =
-                emojis[
-                    Math.floor(
-                        Math.random() *
-                        emojis.length
-                    )
-                ];
-
-
-            emoji.style.left =
-                Math.random() * 100 + "vw";
-
-
-            emoji.style.fontSize =
-                (Math.random() * 14 + 18) + "px";
-
-
-            emoji.style.animationDuration =
-                (Math.random() * 3 + 4) + "s";
-
-
-            document.body.appendChild(emoji);
-
+        for (let i = 0; i < 80; i++) {
 
             setTimeout(() => {
 
-                emoji.remove();
+                const piece = document.createElement("div");
 
-            }, 7000);
+                piece.style.position = "fixed";
+                piece.style.left = Math.random() * 100 + "vw";
+                piece.style.top = "-15px";
+                piece.style.width = "8px";
+                piece.style.height = "8px";
 
-        }
+                piece.style.background =
+                    colors[Math.floor(Math.random() * colors.length)];
 
+                piece.style.borderRadius = "2px";
+                piece.style.zIndex = "9999";
+                piece.style.pointerEvents = "none";
 
-        /* =====================================
-           10. MIDNIGHT CELEBRATION
-        ====================================== */
+                document.body.appendChild(piece);
 
-        function celebration() {
+                const duration =
+                    Math.random() * 2500 + 2000;
 
-            for (let i = 0; i < 35; i++) {
-
-                setTimeout(
-                    createFloatingEmoji,
-                    i * 100
+                piece.animate(
+                    [
+                        {
+                            transform:
+                                "translateY(0) rotate(0deg)",
+                            opacity: 1
+                        },
+                        {
+                            transform:
+                                "translateY(110vh) rotate(720deg)",
+                            opacity: 0
+                        }
+                    ],
+                    {
+                        duration: duration,
+                        easing: "cubic-bezier(.2,.8,.3,1)"
+                    }
                 );
 
-            }
+                setTimeout(
+                    () => piece.remove(),
+                    duration
+                );
 
-
-            /* Simple confetti */
-
-            const colors = [
-                "#ff6b9d",
-                "#ffcf56",
-                "#9b7bff",
-                "#ffffff",
-                "#7ee8fa"
-            ];
-
-
-            for (let i = 0; i < 80; i++) {
-
-                setTimeout(() => {
-
-                    const piece =
-                        document.createElement("div");
-
-                    piece.style.position =
-                        "fixed";
-
-                    piece.style.left =
-                        Math.random() * 100 + "vw";
-
-                    piece.style.top =
-                        "-15px";
-
-                    piece.style.width = "8px";
-
-                    piece.style.height = "8px";
-
-                    piece.style.background =
-                        colors[
-                            Math.floor(
-                                Math.random() *
-                                colors.length
-                            )
-                        ];
-
-                    piece.style.borderRadius =
-                        "2px";
-
-                    piece.style.zIndex = "9999";
-
-                    piece.style.pointerEvents =
-                        "none";
-
-                    document.body.appendChild(piece);
-
-
-                    const duration =
-                        Math.random() * 2500 + 2000;
-
-
-                    piece.animate(
-                        [
-                            {
-                                transform:
-                                    "translateY(0) rotate(0deg)",
-                                opacity: 1
-                            },
-
-                            {
-                                transform:
-                                    `translateY(110vh) rotate(720deg)`,
-                                opacity: 0
-                            }
-                        ],
-                        {
-                            duration:
-                                duration,
-
-                            easing:
-                                "cubic-bezier(.2,.8,.3,1)"
-                        }
-                    );
-
-
-                    setTimeout(
-                        () => piece.remove(),
-                        duration
-                    );
-
-                }, i * 20);
-
-            }
-
+            }, i * 20);
         }
+    }
 
-    </script>
+    updateCountdown();
+
+    const countdownInterval =
+        setInterval(updateCountdown, 1000);
+</script>
 
 </body>
 </html>
