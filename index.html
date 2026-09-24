@@ -2,9 +2,8 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>A Little Birthday Universe ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>A Little Birthday Surprise ✨</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -17,11 +16,11 @@
 
 :root{
     --pink:#f29bb2;
-    --pink2:#ffc4d3;
+    --light-pink:#ffc4d3;
     --purple:#a996ff;
     --blue:#7ddfff;
-    --dark:#090d22;
-    --card:rgba(255,255,255,.07);
+    --bg:#080b1d;
+    --card:rgba(255,255,255,.075);
     --border:rgba(255,255,255,.12);
 }
 
@@ -30,30 +29,43 @@ html{
 }
 
 body{
+    width:100%;
     min-height:100vh;
+    overflow-x:hidden;
     font-family:"Poppins","Hind Siliguri",sans-serif;
     color:#fff;
+
     background:
-        radial-gradient(circle at 15% 15%,rgba(120,80,220,.35),transparent 30%),
-        radial-gradient(circle at 85% 75%,rgba(242,100,150,.25),transparent 30%),
-        linear-gradient(135deg,#080b1c,#171332,#090b1d);
-    overflow-x:hidden;
+        radial-gradient(circle at 10% 10%,rgba(120,80,220,.28),transparent 35%),
+        radial-gradient(circle at 90% 70%,rgba(242,100,150,.18),transparent 35%),
+        linear-gradient(145deg,#080b1d,#15112f,#090b1c);
 }
 
-/* BACKGROUND */
+button{
+    font-family:inherit;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   STARS
+========================= */
 
 #stars{
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
+    overflow:hidden;
 }
 
 .star{
     position:absolute;
-    color:white;
-    opacity:.4;
-    animation:twinkle 3s infinite ease-in-out;
+    color:#fff;
+    opacity:.35;
+    animation:twinkle 3s ease-in-out infinite;
 }
 
 @keyframes twinkle{
@@ -62,238 +74,316 @@ body{
         transform:scale(.7);
     }
     50%{
-        opacity:1;
-        transform:scale(1.2);
+        opacity:.9;
+        transform:scale(1.15);
     }
 }
 
-/* GENERAL */
-
-.container{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:950px;
-    margin:auto;
-    padding:20px 15px 60px;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* LOCK SCREEN */
+/* =========================
+   LOCK SCREEN
+========================= */
 
 #lockScreen{
-    min-height:100vh;
+    position:relative;
+    z-index:2;
+
+    min-height:100svh;
+    width:100%;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    padding:20px;
+
+    padding:16px;
 }
 
 .lock-card{
     width:100%;
-    max-width:680px;
-    padding:45px 25px;
-    border-radius:32px;
+    max-width:500px;
 
-    background:rgba(255,255,255,.07);
+    padding:30px 18px;
+
+    text-align:center;
+
+    border-radius:26px;
+
+    background:rgba(255,255,255,.065);
     border:1px solid var(--border);
-    backdrop-filter:blur(20px);
 
-    box-shadow:0 25px 80px rgba(0,0,0,.4);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-    animation:appear 1.2s ease;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+    animation:appear .9s ease;
 }
 
 .lock-icon{
-    font-size:5rem;
+    font-size:4rem;
     animation:float 3s ease-in-out infinite;
 }
 
 .small-label{
-    margin-top:15px;
-    color:var(--pink2);
-    font-size:.75rem;
-    letter-spacing:4px;
+    margin-top:12px;
+
+    color:var(--light-pink);
+
+    font-size:.65rem;
+    letter-spacing:2.5px;
 }
 
 .lock-card h1{
-    margin-top:15px;
-    font-size:clamp(2rem,8vw,3.6rem);
+    margin-top:12px;
+
+    font-size:clamp(1.9rem,9vw,3rem);
+    line-height:1.2;
 }
 
 .lock-card h1 span{
     color:var(--pink);
 }
 
-.lock-card>p{
-    margin:18px auto 0;
-    max-width:550px;
-    line-height:1.9;
-    color:rgba(255,255,255,.7);
+.lock-description{
+    margin:15px auto 0;
+
+    max-width:390px;
+
+    color:rgba(255,255,255,.68);
+
+    font-size:.9rem;
+    line-height:1.8;
 }
 
 .countdown{
-    margin-top:35px;
+    margin-top:28px;
 }
 
 .countdown-title{
-    color:var(--pink2);
-    margin-bottom:15px;
+    margin-bottom:12px;
+
+    color:var(--light-pink);
+
+    font-size:.85rem;
 }
 
 .timer{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:7px;
+
+    width:100%;
+    max-width:370px;
+
+    margin:auto;
 }
 
 .time-box{
-    width:85px;
-    padding:15px 7px;
-    border-radius:18px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.1);
+    min-width:0;
+
+    padding:12px 3px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.065);
+    border:1px solid rgba(255,255,255,.09);
 }
 
 .time-box span{
     display:block;
-    font-size:2rem;
+
+    font-size:clamp(1.35rem,6vw,2rem);
     font-weight:600;
+
+    line-height:1.2;
 }
 
 .time-box small{
-    color:rgba(255,255,255,.5);
-    font-size:.7rem;
+    display:block;
+
+    margin-top:3px;
+
+    color:rgba(255,255,255,.42);
+
+    font-size:.58rem;
 }
 
 .waiting{
-    margin-top:25px;
-    color:rgba(255,255,255,.4);
-    font-size:.8rem;
+    margin-top:18px;
+
+    color:rgba(255,255,255,.35);
+
+    font-size:.68rem;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 #mainContent{
+    position:relative;
+    z-index:2;
+
     display:none;
-    animation:appear 1.5s ease;
+
+    width:100%;
+    max-width:720px;
+
+    margin:auto;
+
+    padding:0 13px 40px;
+
+    animation:appear 1s ease;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
-    min-height:90vh;
+    min-height:78svh;
+
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
     text-align:center;
+
+    padding:30px 5px 45px;
 }
 
 .hero-cake{
-    font-size:5.5rem;
-    animation:float 3s infinite ease-in-out;
+    font-size:4.5rem;
+
+    filter:drop-shadow(0 8px 20px rgba(242,155,178,.2));
+
+    animation:float 3s ease-in-out infinite;
 }
 
 .hero h1{
-    margin-top:20px;
-    font-size:clamp(2.5rem,9vw,5rem);
-    line-height:1.15;
-    text-shadow:0 0 40px rgba(242,155,178,.25);
+    margin-top:18px;
+
+    font-size:clamp(2.15rem,10vw,4rem);
+    line-height:1.18;
 }
 
 .hero h1 span{
     color:var(--pink);
 }
 
-.hero p{
-    max-width:650px;
-    margin-top:20px;
-    color:rgba(255,255,255,.75);
-    line-height:2;
+.hero-description{
+    margin-top:16px;
+
+    max-width:600px;
+
+    color:rgba(255,255,255,.7);
+
+    font-size:.9rem;
+    line-height:1.9;
 }
 
 .scroll{
-    margin-top:45px;
-    color:rgba(255,255,255,.4);
-    font-size:.8rem;
+    margin-top:32px;
+
+    color:rgba(255,255,255,.3);
+
+    font-size:.65rem;
+
     animation:pulse 2s infinite;
 }
 
-/* SECTION */
+/* =========================
+   SECTIONS
+========================= */
 
 .section{
-    margin:30px 0;
-    padding:32px;
-    border-radius:28px;
+    width:100%;
+
+    margin:14px 0;
+
+    padding:22px 15px;
+
+    border-radius:22px;
 
     background:var(--card);
     border:1px solid var(--border);
-    backdrop-filter:blur(16px);
 
-    box-shadow:0 15px 55px rgba(0,0,0,.2);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
 
 .section-title{
+    margin-bottom:19px;
+
     text-align:center;
-    margin-bottom:25px;
-    font-size:1.55rem;
+
+    font-size:1.25rem;
+    line-height:1.4;
 }
 
 .section-title span{
     color:var(--pink);
 }
 
-/* WISHES */
+/* =========================
+   WISHES
+========================= */
 
 .wish-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:9px;
 }
 
 .wish{
-    min-height:155px;
-    padding:20px;
-    border-radius:20px;
+    min-height:125px;
 
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
+    padding:13px 8px;
+
     text-align:center;
 
-    background:rgba(255,255,255,.05);
+    border-radius:16px;
+
+    background:rgba(255,255,255,.045);
     border:1px solid rgba(255,255,255,.08);
 
     cursor:pointer;
-    transition:.35s;
+
+    transition:.25s;
 }
 
-.wish:hover{
-    transform:translateY(-7px);
-    background:rgba(255,255,255,.1);
+.wish:active{
+    transform:scale(.97);
 }
 
 .wish-icon{
-    font-size:2.3rem;
-    margin-bottom:10px;
+    font-size:1.9rem;
+    margin-bottom:7px;
 }
 
 .wish-title{
-    color:rgba(255,255,255,.8);
+    color:rgba(255,255,255,.65);
+    font-size:.75rem;
 }
 
 .wish-message{
     display:none;
-    color:var(--pink2);
-    line-height:1.8;
-    font-size:.9rem;
+
+    color:var(--light-pink);
+
+    font-size:.76rem;
+    line-height:1.65;
 }
 
 .wish.open .wish-title{
@@ -304,144 +394,205 @@ body{
     display:block;
 }
 
-/* OPEN WHEN */
+/* =========================
+   OPEN WHEN
+========================= */
 
 .open-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+
+    grid-template-columns:1fr;
+
+    gap:9px;
 }
 
 .open-card{
-    padding:22px;
-    border-radius:20px;
-    background:linear-gradient(
-        135deg,
-        rgba(169,150,255,.12),
-        rgba(242,155,178,.08)
-    );
-    border:1px solid rgba(255,255,255,.1);
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(169,150,255,.09),
+            rgba(242,155,178,.055)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
     cursor:pointer;
-    transition:.3s;
+
+    transition:.25s;
 }
 
-.open-card:hover{
-    transform:translateY(-5px);
+.open-card:active{
+    transform:scale(.98);
 }
 
 .open-card h3{
-    font-size:1rem;
-    color:var(--pink2);
+    font-size:.82rem;
+    font-weight:500;
+
+    color:var(--light-pink);
 }
 
 .open-card p{
     display:none;
-    margin-top:12px;
-    color:rgba(255,255,255,.75);
-    line-height:1.8;
-    font-size:.88rem;
+
+    margin-top:9px;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:.76rem;
+    line-height:1.7;
 }
 
 .open-card.active p{
     display:block;
 }
 
-/* RANDOM WISH */
+/* =========================
+   RANDOM WISH
+========================= */
 
 .random-box{
     text-align:center;
 }
 
 .random-message{
-    min-height:70px;
+    min-height:65px;
+
     display:flex;
     align-items:center;
     justify-content:center;
 
-    padding:15px;
-    color:rgba(255,255,255,.8);
-    line-height:1.8;
+    padding:5px;
+
+    color:rgba(255,255,255,.7);
+
+    font-size:.82rem;
+    line-height:1.7;
+
+    transition:.2s;
 }
 
 .random-btn{
-    margin-top:15px;
-    padding:12px 22px;
+    margin-top:8px;
 
-    border:none;
+    padding:10px 19px;
+
+    border:0;
     border-radius:30px;
 
-    background:linear-gradient(
-        135deg,
-        var(--pink),
-        var(--purple)
-    );
+    color:#fff;
 
-    color:white;
-    font-family:inherit;
-    font-size:.9rem;
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    font-size:.78rem;
+
     cursor:pointer;
 
-    transition:.3s;
+    box-shadow:0 7px 20px rgba(169,150,255,.18);
+
+    transition:.25s;
 }
 
-.random-btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 8px 25px rgba(169,150,255,.3);
+.random-btn:active{
+    transform:scale(.95);
 }
 
-/* MEMORY STYLE */
+/* =========================
+   THOUGHT
+========================= */
 
-.memory{
+.thought{
     text-align:center;
 }
 
-.memory-icon{
-    font-size:3rem;
-    margin-bottom:15px;
+.thought-icon{
+    margin-bottom:10px;
+    font-size:2.6rem;
 }
 
-.memory p{
-    color:rgba(255,255,255,.75);
-    line-height:2;
+.thought p{
+    color:rgba(255,255,255,.66);
+
+    font-size:.82rem;
+    line-height:1.9;
 }
 
-/* FINAL */
+.thought strong{
+    color:var(--light-pink);
+}
+
+/* =========================
+   FINAL
+========================= */
 
 .final{
     text-align:center;
+
+    padding-top:28px;
+    padding-bottom:28px;
 }
 
 .final p{
-    color:rgba(255,255,255,.78);
-    line-height:2;
+    color:rgba(255,255,255,.68);
+
+    font-size:.82rem;
+    line-height:1.9;
 }
 
 .final strong{
-    color:var(--pink2);
+    display:inline-block;
+
+    margin-top:8px;
+
+    color:var(--light-pink);
+
+    font-size:1rem;
 }
 
 .signature{
-    margin-top:25px;
-    color:rgba(255,255,255,.45);
-    font-size:.85rem;
+    margin-top:18px;
+
+    color:rgba(255,255,255,.28);
+
+    font-size:.65rem;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+    padding:25px 0 5px;
+
     text-align:center;
-    margin-top:40px;
-    color:rgba(255,255,255,.3);
-    font-size:.75rem;
+
+    color:rgba(255,255,255,.23);
+
+    font-size:.6rem;
 }
 
-/* FLOATING */
+/* =========================
+   FLOATING EMOJI
+========================= */
 
 .floating{
     position:fixed;
-    bottom:-40px;
-    z-index:999;
+
+    bottom:-30px;
+
+    z-index:9999;
+
     pointer-events:none;
+
     animation:floatUp linear forwards;
 }
 
@@ -450,22 +601,27 @@ footer{
         transform:translateY(0) rotate(0);
         opacity:0;
     }
+
     15%{
         opacity:1;
     }
+
     to{
-        transform:translateY(-110vh) rotate(360deg);
+        transform:translateY(-110svh) rotate(360deg);
         opacity:0;
     }
 }
 
-/* ANIMATIONS */
+/* =========================
+   ANIMATIONS
+========================= */
 
 @keyframes appear{
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:translateY(18px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -476,55 +632,109 @@ footer{
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
-        transform:translateY(-12px);
+        transform:translateY(-9px);
     }
 }
 
 @keyframes pulse{
     0%,100%{
-        opacity:.35;
+        opacity:.25;
     }
+
     50%{
-        opacity:1;
+        opacity:.8;
     }
 }
 
-/* MOBILE */
+/* =========================
+   VERY SMALL PHONES
+========================= */
 
-@media(max-width:600px){
+@media(max-width:360px){
 
-    .container{
-        padding:12px 10px 40px;
+    #lockScreen{
+        padding:10px;
     }
 
     .lock-card{
-        padding:35px 18px;
+        padding:25px 13px;
+        border-radius:22px;
+    }
+
+    .lock-icon{
+        font-size:3.4rem;
+    }
+
+    .lock-card h1{
+        font-size:1.8rem;
+    }
+
+    .lock-description{
+        font-size:.78rem;
     }
 
     .time-box{
-        width:70px;
+        padding:10px 2px;
     }
 
     .time-box span{
-        font-size:1.55rem;
+        font-size:1.25rem;
+    }
+
+    .time-box small{
+        font-size:.5rem;
+    }
+
+    #mainContent{
+        padding-left:9px;
+        padding-right:9px;
     }
 
     .section{
-        padding:22px 15px;
+        padding:19px 12px;
+        border-radius:19px;
     }
 
-    .wish-grid,
+    .wish{
+        min-height:115px;
+    }
+
+    .wish-icon{
+        font-size:1.7rem;
+    }
+
+    .wish-message{
+        font-size:.7rem;
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+
+    #mainContent{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .section{
+        padding:30px;
+    }
+
     .open-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .hero{
-        min-height:80vh;
+    .wish-grid{
+        gap:14px;
     }
 
-    .hero-cake{
-        font-size:4.5rem;
+    .wish{
+        min-height:150px;
     }
 }
 </style>
@@ -534,7 +744,6 @@ footer{
 
 <div id="stars"></div>
 
-<div class="container">
 
 <!-- =========================
      LOCK SCREEN
@@ -554,11 +763,10 @@ footer{
             Hey, <span id="lockName">মিষ্টি</span> 🌷
         </h1>
 
-        <p>
+        <p class="lock-description">
             একটা ছোট্ট surprise আছে।
             <br>
-            কিন্তু সেটা দেখার জন্য
-            একটু অপেক্ষা করতে হবে... ✨
+            তবে সেটা দেখার জন্য একটু অপেক্ষা করতে হবে... ✨
         </p>
 
         <div class="countdown">
@@ -608,275 +816,243 @@ footer{
 
 <main id="mainContent">
 
-<!-- HERO -->
+    <section class="hero">
 
-<section class="hero">
+        <div class="hero-cake">🎂</div>
 
-    <div class="hero-cake">
-        🎂
-    </div>
+        <div class="small-label">
+            TODAY IS YOUR DAY ✨
+        </div>
 
-    <div class="small-label">
-        TODAY IS YOUR DAY ✨
-    </div>
+        <h1>
+            শুভ জন্মদিন,
+            <span id="mainName">মিষ্টি</span>! 🎉
+        </h1>
 
-    <h1>
-        শুভ জন্মদিন,
-        <span id="mainName">মিষ্টি</span>! 🎉
-    </h1>
+        <p class="hero-description">
+            তোমার নতুন বছরটা সুন্দর হোক,
+            শান্তিতে ভরে উঠুক,
+            আর ছোট ছোট মুহূর্তগুলো
+            তোমাকে অনেক আনন্দ দিক। 🌸
+        </p>
 
-    <p>
-        তোমার নতুন বছরটা সুন্দর হোক,
-        শান্তিতে ভরে উঠুক,
-        আর জীবনের ছোট ছোট মুহূর্তগুলো
-        তোমাকে অনেক আনন্দ দিক। 🌸
-    </p>
+        <div class="scroll">
+            ↓ নিচে আরও কিছু আছে ↓
+        </div>
 
-    <div class="scroll">
-        ↓ There is more waiting below ↓
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================
-     WISHES
-========================= -->
+    <!-- WISHES -->
 
-<section class="section">
+    <section class="section">
 
-    <h2 class="section-title">
-        তোমার জন্য কিছু
-        <span>ছোট্ট wish</span> 💌
-    </h2>
+        <h2 class="section-title">
+            তোমার জন্য কিছু
+            <span>ছোট্ট wish</span> 💌
+        </h2>
 
-    <div class="wish-grid">
+        <div class="wish-grid">
 
-        <div class="wish" onclick="openWish(this)">
-            <div class="wish-icon">🌸</div>
-            <div class="wish-title">Tap me</div>
-            <div class="wish-message">
-                তোমার প্রতিটা সকাল যেন
-                নতুন কোনো ভালো খবর নিয়ে আসে।
+            <div class="wish" onclick="openWish(this)">
+                <div class="wish-icon">🌸</div>
+                <div class="wish-title">Tap me</div>
+                <div class="wish-message">
+                    তোমার প্রতিটা সকাল যেন
+                    নতুন কোনো ভালো খবর নিয়ে আসে।
+                </div>
             </div>
-        </div>
 
-        <div class="wish" onclick="openWish(this)">
-            <div class="wish-icon">✨</div>
-            <div class="wish-title">Tap me</div>
-            <div class="wish-message">
-                তোমার স্বপ্নগুলো ধীরে ধীরে
-                হলেও একদিন সত্যি হোক।
+            <div class="wish" onclick="openWish(this)">
+                <div class="wish-icon">✨</div>
+                <div class="wish-title">Tap me</div>
+                <div class="wish-message">
+                    তোমার স্বপ্নগুলো ধীরে ধীরে
+                    হলেও একদিন সত্যি হোক।
+                </div>
             </div>
-        </div>
 
-        <div class="wish" onclick="openWish(this)">
-            <div class="wish-icon">🌻</div>
-            <div class="wish-title">Tap me</div>
-            <div class="wish-message">
-                কঠিন দিনগুলো ছোট হয়ে যাক,
-                আর সুন্দর দিনগুলো একটু বেশি সময় থাকুক।
+            <div class="wish" onclick="openWish(this)">
+                <div class="wish-icon">🌻</div>
+                <div class="wish-title">Tap me</div>
+                <div class="wish-message">
+                    কঠিন দিনগুলো ছোট হয়ে যাক,
+                    আর সুন্দর দিনগুলো একটু বেশি সময় থাকুক।
+                </div>
             </div>
-        </div>
 
-        <div class="wish" onclick="openWish(this)">
-            <div class="wish-icon">🕊️</div>
-            <div class="wish-title">Tap me</div>
-            <div class="wish-message">
-                জীবনে শান্তি, happiness আর
-                নিজের জন্য অনেক সুন্দর মুহূর্ত পাও।
+            <div class="wish" onclick="openWish(this)">
+                <div class="wish-icon">🕊️</div>
+                <div class="wish-title">Tap me</div>
+                <div class="wish-message">
+                    জীবনে শান্তি, happiness আর
+                    নিজের জন্য অনেক সুন্দর মুহূর্ত পাও।
+                </div>
             </div>
+
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================
-     OPEN WHEN
-========================= -->
+    <!-- OPEN WHEN -->
 
-<section class="section">
+    <section class="section">
 
-    <h2 class="section-title">
-        Open when... 🌙
-    </h2>
+        <h2 class="section-title">
+            Open when... 🌙
+        </h2>
 
-    <div class="open-grid">
+        <div class="open-grid">
 
-        <div class="open-card" onclick="openWhen(this)">
-            <h3>🌧️ যখন মন খারাপ</h3>
-            <p>
-                মনে রেখো, খারাপ সময় কখনো
-                permanent না। একটু সময় দাও,
-                সবকিছু আবার সুন্দর লাগবে। 🤍
-            </p>
+            <div class="open-card" onclick="openWhen(this)">
+                <h3>🌧️ যখন মন খারাপ</h3>
+                <p>
+                    মনে রেখো, খারাপ সময় permanent না।
+                    একটু সময় দাও, সবকিছু আবার সুন্দর লাগবে। 🤍
+                </p>
+            </div>
+
+            <div class="open-card" onclick="openWhen(this)">
+                <h3>🌱 যখন নতুন কিছু শুরু করবে</h3>
+                <p>
+                    শুরুটা ছোট হলেও সমস্যা নেই।
+                    শুধু থেমে যেও না। ✨
+                </p>
+            </div>
+
+            <div class="open-card" onclick="openWhen(this)">
+                <h3>😴 যখন খুব tired</h3>
+                <p>
+                    সবসময় productive হতে হয় না।
+                    কখনো কখনো rest করাটাও দরকার। 🌷
+                </p>
+            </div>
+
+            <div class="open-card" onclick="openWhen(this)">
+                <h3>😊 যখন খুব ভালো লাগবে</h3>
+                <p>
+                    তখন সেই happiness-টা পুরোপুরি enjoy করো।
+                    সুন্দর মুহূর্তগুলো celebrate করা উচিত। 🎉
+                </p>
+            </div>
+
         </div>
 
-        <div class="open-card" onclick="openWhen(this)">
-            <h3>🌱 যখন নতুন কিছু শুরু করবে</h3>
-            <p>
-                শুরুটা ছোট হলেও সমস্যা নেই।
-                শুধু থেমে যেও না। তোমার journey
-                তোমার নিজের মতোই সুন্দর হোক। ✨
-            </p>
+    </section>
+
+
+    <!-- RANDOM -->
+
+    <section class="section random-box">
+
+        <h2 class="section-title">
+            One more little surprise ✨
+        </h2>
+
+        <div class="random-message" id="randomMessage">
+            Button-টা চাপো, একটা random wish তোমার জন্য। 💌
         </div>
 
-        <div class="open-card" onclick="openWhen(this)">
-            <h3>😴 যখন খুব tired</h3>
-            <p>
-                সবসময় productive হতে হয় না।
-                কখনো কখনো simply rest করাটাও
-                দরকার। Take care of yourself. 🌷
-            </p>
+        <button class="random-btn" onclick="randomWish()">
+            Give me a wish ✨
+        </button>
+
+    </section>
+
+
+    <!-- THOUGHT -->
+
+    <section class="section thought">
+
+        <div class="thought-icon">
+            🌌
         </div>
 
-        <div class="open-card" onclick="openWhen(this)">
-            <h3>😊 যখন খুব ভালো লাগবে</h3>
-            <p>
-                তখন সেই happiness-টা
-                পুরোপুরি enjoy করো।
-                সুন্দর মুহূর্তগুলো celebrate করা উচিত। 🎉
-            </p>
+        <h2 class="section-title">
+            One little <span>thought</span>
+        </h2>
+
+        <p>
+            সময়ের সাথে অনেক কিছুই বদলায়।
+            মানুষ ব্যস্ত হয়, কথাবার্তাও হয়তো
+            আগের মতো থাকে না।
+            <br><br>
+
+            তবুও কারও জন্য
+            <strong>ভালো কিছু চাওয়াটা</strong>
+            সবসময়ই সুন্দর একটা ব্যাপার।
+            <br><br>
+
+            তাই আজ শুধু চাই,
+            তোমার সামনে থাকা দিনগুলো সুন্দর হোক। 🌷
+        </p>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="section final">
+
+        <h2 class="section-title">
+            And finally... 🎁
+        </h2>
+
+        <p>
+            এইটুকু শুধু তোমার জন্য
+            একটা ছোট্ট birthday surprise।
+            <br>
+            কোনো বড় আয়োজন নয়,
+            শুধু চেয়েছিলাম তোমার বিশেষ দিনটায়
+            একটু অন্যরকমভাবে শুভেচ্ছাটা জানাতে। 🌸
+            <br><br>
+
+            তোমার দিনটা সুন্দর কাটুক,
+            আর সামনে আসা প্রতিটা দিন নিয়ে আসুক
+            নতুন নতুন আনন্দ আর ভালো মুহূর্ত।
+            <br><br>
+
+            <strong>
+                Happy Birthday once again! 🎂✨
+            </strong>
+        </p>
+
+        <div class="signature">
+            Wishing you lots of good things ahead 🌷
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================
-     RANDOM WISH
-========================= -->
-
-<section class="section random-box">
-
-    <h2 class="section-title">
-        One more little surprise ✨
-    </h2>
-
-    <div class="random-message" id="randomMessage">
-        Button-টা চাপো, একটা random wish তোমার জন্য। 💌
-    </div>
-
-    <button class="random-btn" onclick="randomWish()">
-        Give me a wish ✨
-    </button>
-
-</section>
-
-
-<!-- =========================
-     THOUGHT
-========================= -->
-
-<section class="section memory">
-
-    <div class="memory-icon">
-        🌌
-    </div>
-
-    <h2 class="section-title">
-        One little <span>thought</span>
-    </h2>
-
-    <p>
-        সময়ের সাথে অনেক কিছুই বদলায়।
-        মানুষ ব্যস্ত হয়, দূরত্ব তৈরি হয়,
-        কথাবার্তাও হয়তো আগের মতো থাকে না।
-        <br><br>
-
-        তবুও কারও জন্য
-        <span style="color:var(--pink2)">
-            ভালো কিছু চাওয়াটা
-        </span>
-        সবসময়ই সুন্দর একটা ব্যাপার।
-        <br><br>
-
-        তাই আজ শুধু চাই,
-        তোমার সামনে থাকা দিনগুলো
-        সুন্দর হোক। 🌷
-    </p>
-
-</section>
-
-
-<!-- =========================
-     FINAL
-========================= -->
-
-<section class="section final">
-
-    <h2 class="section-title">
-        And finally... 🎁
-    </h2>
-
-    <p>
-        এইটুকু শুধু তোমার জন্য
-        একটা ছোট্ট birthday surprise।
-        <br>
-        কোনো বড় আয়োজন নয়,
-        শুধু চেয়েছিলাম তোমার বিশেষ দিনটায়
-        <br>
-        একটু অন্যরকমভাবে শুভেচ্ছাটা জানাতে। 🌸
-        <br><br>
-
-        তোমার দিনটা সুন্দর কাটুক,
-        <br>
-        আর সামনে আসা প্রতিটা দিন নিয়ে আসুক
-        <br>
-        নতুন নতুন আনন্দ আর ভালো মুহূর্ত।
-        <br><br>
-
-        <strong>
-            Happy Birthday once again! 🎂✨
-        </strong>
-    </p>
-
-    <div class="signature">
-        Wishing you lots of good things ahead 🌷
-    </div>
-
-</section>
-
-
-<footer>
-    Made with good wishes • 2026 ✨
-</footer>
+    <footer>
+        Made with good wishes • 2026 ✨
+    </footer>
 
 </main>
-
-</div>
 
 
 <script>
 
 /* =========================================
-   ONLY CHANGE THESE TWO
+   শুধু এই দুইটা পরিবর্তন করবে
 ========================================= */
 
 const friendName = "মিষ্টি";
 
 /*
-   FINAL BIRTHDAY TIME
-
-   Bangladesh time = +06:00
-
    TEST করার সময়:
-   এখানে কয়েক মিনিট পরের সময় বসাবে।
+   বর্তমান সময় থেকে কয়েক মিনিট পরের সময় দাও।
 
    FINAL:
-   2026-09-24T12:26:00+06:00
+   2026-09-25T00:00:00+06:00
 */
 
 const birthdayDate =
 "2026-09-25T00:00:00+06:00";
 
 
-/* =========================================
-   NAME
-========================================= */
+/* NAME */
 
 document.getElementById("lockName").textContent =
 friendName;
@@ -885,9 +1061,7 @@ document.getElementById("mainName").textContent =
 friendName;
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+/* ELEMENTS */
 
 const lockScreen =
 document.getElementById("lockScreen");
@@ -911,9 +1085,7 @@ const targetTime =
 new Date(birthdayDate).getTime();
 
 
-/* =========================================
-   UNLOCK
-========================================= */
+/* UNLOCK */
 
 let unlocked = false;
 
@@ -933,18 +1105,14 @@ function unlockWebsite(){
 }
 
 
-/* =========================================
-   COUNTDOWN
-========================================= */
+/* COUNTDOWN */
 
 function updateCountdown(){
 
-    const now =
-    Date.now();
+    const now = Date.now();
 
     const difference =
     targetTime - now;
-
 
     if(difference <= 0){
 
@@ -955,13 +1123,11 @@ function updateCountdown(){
         return;
     }
 
-
     const days =
     Math.floor(
         difference /
         (1000*60*60*24)
     );
-
 
     const hours =
     Math.floor(
@@ -970,7 +1136,6 @@ function updateCountdown(){
         (1000*60*60)
     );
 
-
     const minutes =
     Math.floor(
         (difference %
@@ -978,14 +1143,12 @@ function updateCountdown(){
         (1000*60)
     );
 
-
     const seconds =
     Math.floor(
         (difference %
         (1000*60)) /
         1000
     );
-
 
     daysEl.textContent =
     String(days).padStart(2,"0");
@@ -1000,42 +1163,33 @@ function updateCountdown(){
     String(seconds).padStart(2,"0");
 }
 
-
 updateCountdown();
 
 const countdownInterval =
 setInterval(updateCountdown,1000);
 
 
-/* =========================================
-   WISH CARDS
-========================================= */
+/* WISH */
 
 function openWish(element){
 
     element.classList.toggle("open");
 
     createFloatingEmoji();
-
 }
 
 
-/* =========================================
-   OPEN WHEN
-========================================= */
+/* OPEN WHEN */
 
 function openWhen(element){
 
     element.classList.toggle("active");
 
     createFloatingEmoji();
-
 }
 
 
-/* =========================================
-   RANDOM WISH
-========================================= */
+/* RANDOM WISH */
 
 const randomWishes = [
 
@@ -1055,7 +1209,6 @@ const randomWishes = [
 
 ];
 
-
 function randomWish(){
 
     const message =
@@ -1063,36 +1216,32 @@ function randomWish(){
 
     const random =
     Math.floor(
-        Math.random() *
-        randomWishes.length
+        Math.random()*randomWishes.length
     );
 
-    message.style.opacity = "0";
+    message.style.opacity="0";
 
     setTimeout(()=>{
 
         message.textContent =
         randomWishes[random];
 
-        message.style.opacity = "1";
+        message.style.opacity="1";
 
-    },200);
+    },180);
 
     createFloatingEmoji();
-
 }
 
 
-/* =========================================
-   STARS
-========================================= */
+/* STARS */
 
 function createStars(){
 
     const stars =
     document.getElementById("stars");
 
-    for(let i=0;i<100;i++){
+    for(let i=0;i<70;i++){
 
         const star =
         document.createElement("div");
@@ -1108,7 +1257,7 @@ function createStars(){
         Math.random()*100+"%";
 
         star.style.fontSize =
-        (Math.random()*8+4)+"px";
+        (Math.random()*6+3)+"px";
 
         star.style.animationDelay =
         Math.random()*3+"s";
@@ -1120,9 +1269,7 @@ function createStars(){
 createStars();
 
 
-/* =========================================
-   FLOATING EMOJIS
-========================================= */
+/* FLOATING EMOJI */
 
 function createFloatingEmoji(){
 
@@ -1136,7 +1283,6 @@ function createFloatingEmoji(){
         "⭐"
     ];
 
-
     const emoji =
     document.createElement("div");
 
@@ -1149,46 +1295,34 @@ function createFloatingEmoji(){
         )
     ];
 
-
     emoji.style.left =
     Math.random()*100+"vw";
 
     emoji.style.fontSize =
-    (Math.random()*15+18)+"px";
+    (Math.random()*12+17)+"px";
 
     emoji.style.animationDuration =
     (Math.random()*3+4)+"s";
 
-
     document.body.appendChild(emoji);
-
 
     setTimeout(()=>{
         emoji.remove();
     },7000);
-
 }
 
 
-/* =========================================
-   CELEBRATION
-========================================= */
+/* CELEBRATION */
 
 function celebration(){
 
-    /* Floating emojis */
-
-    for(let i=0;i<45;i++){
+    for(let i=0;i<30;i++){
 
         setTimeout(
             createFloatingEmoji,
-            i*80
+            i*90
         );
-
     }
-
-
-    /* Confetti */
 
     const colors=[
         "#f29bb2",
@@ -1198,8 +1332,7 @@ function celebration(){
         "#ffffff"
     ];
 
-
-    for(let i=0;i<100;i++){
+    for(let i=0;i<70;i++){
 
         setTimeout(()=>{
 
@@ -1211,11 +1344,11 @@ function celebration(){
             piece.style.left =
             Math.random()*100+"vw";
 
-            piece.style.top="-15px";
+            piece.style.top="-10px";
 
-            piece.style.width="8px";
+            piece.style.width="7px";
 
-            piece.style.height="8px";
+            piece.style.height="7px";
 
             piece.style.background =
             colors[
@@ -1230,13 +1363,10 @@ function celebration(){
 
             piece.style.pointerEvents="none";
 
-
             document.body.appendChild(piece);
 
-
             const duration =
-            Math.random()*2500+2000;
-
+            Math.random()*2200+1800;
 
             piece.animate(
 
@@ -1261,17 +1391,13 @@ function celebration(){
 
             );
 
-
             setTimeout(
                 ()=>piece.remove(),
                 duration
             );
 
-
-        },i*15);
-
+        },i*20);
     }
-
 }
 
 </script>
