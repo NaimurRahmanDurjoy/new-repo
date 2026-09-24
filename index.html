@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Birthday Surprise ✨</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --pink: #ff6b9d;
+            --pink2: #ff9fbd;
+            --purple: #8c6cff;
+            --dark: #0e0920;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", "Hind Siliguri", sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 20% 20%, #5b35a8 0%, transparent 32%),
+                radial-gradient(circle at 80% 80%, #a62e65 0%, transparent 30%),
+                linear-gradient(135deg, #0d081c, #21123d, #10091d);
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        #stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: white;
+            opacity: 0.5;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.15;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* =========================
+           COMMON
+        ========================== */
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            padding: 25px 16px 60px;
+        }
+
+        /* =========================
+           LOCK SCREEN
+        ========================== */
+
+        #lockScreen {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lock-card {
+            width: 100%;
+            max-width: 650px;
+            padding: 40px 25px;
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.13);
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 70px rgba(0,0,0,0.35),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+
+            animation: appear 1.2s ease;
+        }
+
+        .lock-icon {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .lock-card .small {
+            color: var(--pink2);
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+        }
+
+        .lock-card h1 {
+            font-size: clamp(1.8rem, 7vw, 3.2rem);
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        .lock-card h1 span {
+            color: var(--pink);
+        }
+
+        .lock-card > p {
+            color: rgba(255,255,255,0.72);
+            line-height: 1.8;
+            max-width: 520px;
+            margin: auto;
+        }
+
+        /* =========================
+           COUNTDOWN
+        ========================== */
+
+        #countdown {
+            margin-top: 30px;
+        }
+
+        .countdown-title {
+            color: var(--pink2);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            width: 85px;
+            padding: 15px 8px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .time-box small {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.7rem;
+        }
+
+        .waiting-message {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================== */
+
+        #mainContent {
+            display: none;
+            animation: appear 1.5s ease;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero .cake {
+            font-size: 5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero .small {
+            margin-top: 15px;
+            color: var(--pink2);
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+        }
+
+        .hero h1 {
+            margin-top: 15px;
+            font-size: clamp(2.2rem, 9vw, 4.5rem);
+            line-height: 1.15;
+            text-shadow: 0 0 35px rgba(255,107,157,0.35);
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            margin-top: 20px;
+            max-width: 620px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.9;
+        }
+
+        .scroll-text {
+            margin-top: 40px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        .section {
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.11);
+            backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        .section-title span {
+            color: var(--pink);
+        }
+
+        /* =========================
+           WISH CARDS
+        ========================== */
+
+        .wish-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .wish {
+            min-height: 150px;
+            padding: 20px;
+            border-radius: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.09);
+
+            cursor: pointer;
+            transition: 0.35s;
+        }
+
+        .wish:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .wish-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .wish-title {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .wish-message {
+            display: none;
+            color: var(--pink2);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .wish.open .wish-title {
+            display: none;
+        }
+
+        .wish.open .wish-message {
+            display: block;
+        }
+
+        /* =========================
+           THOUGHT
+        ========================== */
+
+        .thought {
+            text-align: center;
+        }
+
+        .thought-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .thought p {
+            color: rgba(255,255,255,0.8);
+            line-height: 2;
+        }
+
+        .highlight {
+            color: var(--pink2);
+            font-weight: 600;
+        }
+
+        /* =========================
+           FINAL
+        ========================== */
+
+        .final-message {
+            text-align: center;
+        }
+
+        .final-message p {
+            color: rgba(255,255,255,0.8);
+            line-height: 2;
+            font-size: 1rem;
+        }
+
+        .signature {
+            margin-top: 25px;
+            color: var(--pink2);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.75rem;
+        }
+
+        /* =========================
+           FLOATING EMOJIS
+        ========================== */
+
+        .floating {
+            position: fixed;
+            bottom: -40px;
+            z-index: 10;
+            pointer-events: none;
+
+            animation: floatUp linear forwards;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%,100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 15px 12px 40px;
+            }
+
+            .lock-card {
+                padding: 35px 18px;
+            }
+
+            .time-box {
+                width: 70px;
+                padding: 12px 5px;
+            }
+
+            .time-box span {
+                font-size: 1.55rem;
+            }
+
+            .section {
+                padding: 22px 15px;
+                border-radius: 20px;
+            }
+
+            .wish-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wish {
+                min-height: 125px;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="stars"></div>
+
+    <div class="container">
+
+        <!-- =========================
+             LOCK SCREEN
+        ========================== -->
+
+        <section id="lockScreen">
+
+            <div class="lock-card">
+
+                <div class="lock-icon">
+                    🎁
+                </div>
+
+                <div class="small">
+                    SOMETHING IS WAITING FOR YOU
+                </div>
+
+                <h1>
+                    Hey, <span id="lockName">মিষ্টি</span> 🌷
+                </h1>
+
+                <p>
+                    একটা ছোট্ট surprise আছে।
+                    <br>
+                    তবে সেটা দেখার জন্য একটু অপেক্ষা করতে হবে... ✨
+                </p>
+
+                <div id="countdown">
+
+                    <div class="countdown-title">
+                        Your surprise unlocks in
+                    </div>
+
+                    <div class="timer">
+
+                        <div class="time-box">
+                            <span id="days">00</span>
+                            <small>Days</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="hours">00</span>
+                            <small>Hours</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="minutes">00</span>
+                            <small>Minutes</small>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="seconds">00</span>
+                            <small>Seconds</small>
+                        </div>
+
+                    </div>
+
+                    <div class="waiting-message">
+                        Come back when the clock reaches midnight 🌙
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN SURPRISE
+        ========================== -->
+
+        <main id="mainContent">
+
+            <section class="hero">
+
+                <div class="cake">
+                    🎂
+                </div>
+
+                <div class="small">
+                    TODAY IS YOUR DAY ✨
+                </div>
+
+                <h1>
+                    শুভ জন্মদিন,
+                    <span id="mainName">মিষ্টি</span>! 🎉
+                </h1>
+
+                <p>
+                    তোমার নতুন বছরটা সুন্দর হোক,
+                    শান্তিতে ভরে উঠুক,
+                    আর জীবনের ছোট ছোট মুহূর্তগুলোও
+                    তোমাকে অনেক আনন্দ দিক।
+                </p>
+
+                <div class="scroll-text">
+                    ↓ Scroll down ↓
+                </div>
+
+            </section>
+
+
+            <!-- WISHES -->
+
+            <section class="section">
+
+                <h2 class="section-title">
+                    তোমার জন্য কিছু
+                    <span>ছোট্ট wish</span> 💌
+                </h2>
+
+                <div class="wish-grid">
+
+                    <div class="wish" onclick="openWish(this)">
+
+                        <div class="wish-emoji">
+                            🌸
+                        </div>
+
+                        <div class="wish-title">
+                            Tap me
+                        </div>
+
+                        <div class="wish-message">
+                            তোমার প্রতিটা সকাল যেন
+                            নতুন কোনো ভালো খবর নিয়ে আসে।
+                        </div>
+
+                    </div>
+
+
+                    <div class="wish" onclick="openWish(this)">
+
+                        <div class="wish-emoji">
+                            ✨
+                        </div>
+
+                        <div class="wish-title">
+                            Tap me
+                        </div>
+
+                        <div class="wish-message">
+                            তোমার স্বপ্নগুলো ধীরে ধীরে হলেও
+                            একদিন সত্যি হোক।
+                        </div>
+
+                    </div>
+
+
+                    <div class="wish" onclick="openWish(this)">
+
+                        <div class="wish-emoji">
+                            🌻
+                        </div>
+
+                        <div class="wish-title">
+                            Tap me
+                        </div>
+
+                        <div class="wish-message">
+                            কঠিন দিনগুলো ছোট হয়ে যাক,
+                            আর সুন্দর দিনগুলো একটু বেশি সময় থাকুক।
+                        </div>
+
+                    </div>
+
+
+                    <div class="wish" onclick="openWish(this)">
+
+                        <div class="wish-emoji">
+                            🕊️
+                        </div>
+
+                        <div class="wish-title">
+                            Tap me
+                        </div>
+
+                        <div class="wish-message">
+                            জীবনে শান্তি, happiness আর
+                            নিজের জন্য অনেক সুন্দর মুহূর্ত পাও।
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- THOUGHT -->
+
+            <section class="section thought">
+
+                <h2 class="section-title">
+                    One little <span>thought</span> 🌙
+                </h2>
+
+                <div class="thought-icon">
+                    🌌
+                </div>
+
+                <p>
+                    সময়ের সাথে অনেক কিছুই বদলায়।
+                    মানুষ ব্যস্ত হয়, দূরত্ব তৈরি হয়,
+                    কথাবার্তাও হয়তো আগের মতো থাকে না।
+                    <br><br>
+
+                    তবুও কারও জন্য
+                    <span class="highlight">
+                        ভালো কিছু চাওয়াটা
+                    </span>
+                    সবসময়ই সুন্দর একটা ব্যাপার।
+                </p>
+
+            </section>
+
+
+            <!-- FINAL -->
+
+            <section class="section final-message">
+
+                <h2 class="section-title">
+                    And finally... 🎁
+                </h2>
+
+                <p>
+                    এইটুকু শুধু তোমার জন্য একটা
+                    ছোট্ট birthday surprise।
+                    <br>
+                    কোনো বড় আয়োজন নয়,
+                    শুধু চেয়েছিলাম তোমার বিশেষ দিনটায়
+                    <br>
+                    একটু অন্যরকমভাবে শুভেচ্ছাটা জানাতে। 🌷
+                    <br><br>
+
+                    তোমার দিনটা সুন্দর কাটুক,
+                    <br>
+                    আর সামনে আসা প্রতিটা দিন নিয়ে আসুক
+                    <br>
+                    নতুন নতুন আনন্দ আর ভালো মুহূর্ত।
+                    <br><br>
+
+                    <strong>
+                        Happy Birthday once again! 🎂✨
+                    </strong>
+                </p>
+
+                <div class="signature">
+                    — Wishing you well 🌷
+                </div>
+
+            </section>
+
+
+            <footer>
+                Made with good wishes • 2026 ✨
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =====================================
+           1. CHANGE THESE TWO THINGS
+        ====================================== */
+
+        const friendName = "মিষ্টি";
+
+        /*
+           IMPORTANT:
+           Birthday date + midnight.
+
+           Format:
+           YYYY-MM-DDTHH:MM:SS+06:00
+
+           +06:00 = Bangladesh time
+        */
+
+        const birthdayDate =
+            "2026-09-25T00:00:00+06:00";
+
+
+        /* =====================================
+           2. SET NAME
+        ====================================== */
+
+        document.getElementById("lockName").textContent = friendName;
+        document.getElementById("mainName").textContent = friendName;
+
+
+        /* =====================================
+           3. ELEMENTS
+        ====================================== */
+
+        const lockScreen =
+            document.getElementById("lockScreen");
+
+        const mainContent =
+            document.getElementById("mainContent");
+
+        const daysEl =
+            document.getElementById("days");
+
+        const hoursEl =
+            document.getElementById("hours");
+
+        const minutesEl =
+            document.getElementById("minutes");
+
+        const secondsEl =
+            document.getElementById("seconds");
+
+
+        /* =====================================
+           4. COUNTDOWN
+        ====================================== */
+
+        const targetTime =
+            new Date(birthdayDate).getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+            const difference =
+                targetTime - now;
+
+
+            /* Birthday has arrived */
+
+            if (difference <= 0) {
+
+                unlockWebsite();
+
+                return;
+            }
+
+
+            const days =
+                Math.floor(
+                    difference /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference %
+                    (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference %
+                    (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (difference %
+                    (1000 * 60)) /
+                    1000
+                );
+
+
+            daysEl.textContent =
+                String(days).padStart(2, "0");
+
+            hoursEl.textContent =
+                String(hours).padStart(2, "0");
+
+            minutesEl.textContent =
+                String(minutes).padStart(2, "0");
+
+            secondsEl.textContent =
+                String(seconds).padStart(2, "0");
+        }
+
+
+        /* =====================================
+           5. UNLOCK
+        ====================================== */
+
+        let unlocked = false;
+
+
+        function unlockWebsite() {
+
+            if (unlocked) return;
+
+            unlocked = true;
+
+            clearInterval(countdownInterval);
+
+            lockScreen.style.display = "none";
+
+            mainContent.style.display = "block";
+
+            window.scrollTo(0, 0);
+
+            celebration();
+
+        }
+
+
+        /* =====================================
+           6. RUN COUNTDOWN
+        ====================================== */
+
+        updateCountdown();
+
+        const countdownInterval =
+            setInterval(
+                updateCountdown,
+                1000
+            );
+
+
+        /* =====================================
+           7. WISH CARDS
+        ====================================== */
+
+        function openWish(element) {
+
+            element.classList.toggle("open");
+
+            createFloatingEmoji();
+
+        }
+
+
+        /* =====================================
+           8. STARS
+        ====================================== */
+
+        function createStars() {
+
+            const stars =
+                document.getElementById("stars");
+
+
+            for (let i = 0; i < 90; i++) {
+
+                const star =
+                    document.createElement("div");
+
+                star.className = "star";
+
+                star.textContent = "✦";
+
+                star.style.left =
+                    Math.random() * 100 + "%";
+
+                star.style.top =
+                    Math.random() * 100 + "%";
+
+                star.style.fontSize =
+                    (Math.random() * 8 + 4) + "px";
+
+                star.style.animationDelay =
+                    Math.random() * 3 + "s";
+
+                stars.appendChild(star);
+            }
+        }
+
+
+        createStars();
+
+
+        /* =====================================
+           9. FLOATING EMOJIS
+        ====================================== */
+
+        function createFloatingEmoji() {
+
+            const emojis = [
+                "💗",
+                "✨",
+                "🌸",
+                "💫",
+                "🎀",
+                "🌷"
+            ];
+
+
+            const emoji =
+                document.createElement("div");
+
+            emoji.className = "floating";
+
+            emoji.textContent =
+                emojis[
+                    Math.floor(
+                        Math.random() *
+                        emojis.length
+                    )
+                ];
+
+
+            emoji.style.left =
+                Math.random() * 100 + "vw";
+
+
+            emoji.style.fontSize =
+                (Math.random() * 14 + 18) + "px";
+
+
+            emoji.style.animationDuration =
+                (Math.random() * 3 + 4) + "s";
+
+
+            document.body.appendChild(emoji);
+
+
+            setTimeout(() => {
+
+                emoji.remove();
+
+            }, 7000);
+
+        }
+
+
+        /* =====================================
+           10. MIDNIGHT CELEBRATION
+        ====================================== */
+
+        function celebration() {
+
+            for (let i = 0; i < 35; i++) {
+
+                setTimeout(
+                    createFloatingEmoji,
+                    i * 100
+                );
+
+            }
+
+
+            /* Simple confetti */
+
+            const colors = [
+                "#ff6b9d",
+                "#ffcf56",
+                "#9b7bff",
+                "#ffffff",
+                "#7ee8fa"
+            ];
+
+
+            for (let i = 0; i < 80; i++) {
+
+                setTimeout(() => {
+
+                    const piece =
+                        document.createElement("div");
+
+                    piece.style.position =
+                        "fixed";
+
+                    piece.style.left =
+                        Math.random() * 100 + "vw";
+
+                    piece.style.top =
+                        "-15px";
+
+                    piece.style.width = "8px";
+
+                    piece.style.height = "8px";
+
+                    piece.style.background =
+                        colors[
+                            Math.floor(
+                                Math.random() *
+                                colors.length
+                            )
+                        ];
+
+                    piece.style.borderRadius =
+                        "2px";
+
+                    piece.style.zIndex = "9999";
+
+                    piece.style.pointerEvents =
+                        "none";
+
+                    document.body.appendChild(piece);
+
+
+                    const duration =
+                        Math.random() * 2500 + 2000;
+
+
+                    piece.animate(
+                        [
+                            {
+                                transform:
+                                    "translateY(0) rotate(0deg)",
+                                opacity: 1
+                            },
+
+                            {
+                                transform:
+                                    `translateY(110vh) rotate(720deg)`,
+                                opacity: 0
+                            }
+                        ],
+                        {
+                            duration:
+                                duration,
+
+                            easing:
+                                "cubic-bezier(.2,.8,.3,1)"
+                        }
+                    );
+
+
+                    setTimeout(
+                        () => piece.remove(),
+                        duration
+                    );
+
+                }, i * 20);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
